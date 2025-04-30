@@ -1,11 +1,14 @@
 package com.digibank.accounts.service.Impl;
 
 import com.digibank.accounts.constants.AccountConstants;
+import com.digibank.accounts.dto.AccountDTO;
 import com.digibank.accounts.dto.CustomerDTO;
 import com.digibank.accounts.entity.Account;
 import com.digibank.accounts.entity.Customer;
 import com.digibank.accounts.exception.CustomerAlreadyExistsException;
+import com.digibank.accounts.exception.ResourceNotFoundException;
 import com.digibank.accounts.mapper.CustomerMapper;
+import com.digibank.accounts.mapper.AccountMapper;
 import com.digibank.accounts.repository.AccountRepository;
 import com.digibank.accounts.repository.CustomerRepository;
 import com.digibank.accounts.service.IAccountService;
@@ -38,6 +41,26 @@ public class AccountServiceImpl implements IAccountService {
         customer.setCreatedBy("Anonymous");
         Customer savedCustomer = customerRepository.save(customer);
         accountRepository.save(createNewAccount(savedCustomer));
+    }
+
+    /**
+     * @param mobileNumber - mobile number of customer
+     * @return the account details
+     */
+    @Override
+    public CustomerDTO getAccountDetails(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                ()-> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+
+        Account account = accountRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
+                ()-> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
+        );
+
+        CustomerDTO customerDto = CustomerMapper.mapToCustomerDTO(customer, new CustomerDTO());
+        customerDto.setAccountDto(AccountMapper.mapToAccountsDto(account, new AccountDTO()));
+
+        return customerDto;
     }
 
     /**
