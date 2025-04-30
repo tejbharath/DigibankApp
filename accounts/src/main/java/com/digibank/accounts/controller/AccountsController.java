@@ -4,7 +4,6 @@ import com.digibank.accounts.constants.AccountConstants;
 import com.digibank.accounts.dto.CustomerDTO;
 import com.digibank.accounts.dto.ResponseDTO;
 import com.digibank.accounts.service.IAccountService;
-import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,6 +36,14 @@ public class AccountsController {
     public ResponseEntity<ResponseDTO> updateAccount(@PathVariable Long customerId, @RequestBody CustomerDTO customerDto) {
 
         accountService.updateAccountDetails(customerId, customerDto);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(AccountConstants.REQUEST_SUCCESS_CODE, AccountConstants.REQUEST_SUCCESS_MESSAGE));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDTO> deleteAccount(@RequestParam String mobileNumber) {
+
+        accountService.deleteAccountDetails(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(AccountConstants.REQUEST_SUCCESS_CODE, AccountConstants.REQUEST_SUCCESS_MESSAGE));
     }

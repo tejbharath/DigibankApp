@@ -22,4 +22,10 @@ public interface IAccountService {
      * @param customerDto - customerDto of customer
      */
     void updateAccountDetails(Long customerId, CustomerDTO customerDto);
+
+    /**
+     *
+     * @param mobileNumber - mobile number of customer
+     */
+    void deleteAccountDetails(String mobileNumber);
 }
