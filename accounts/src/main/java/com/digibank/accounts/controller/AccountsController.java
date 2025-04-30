@@ -4,6 +4,7 @@ import com.digibank.accounts.constants.AccountConstants;
 import com.digibank.accounts.dto.CustomerDTO;
 import com.digibank.accounts.dto.ResponseDTO;
 import com.digibank.accounts.service.IAccountService;
+import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,7 +28,16 @@ public class AccountsController {
 
     @GetMapping("/getAccountDetails")
     public ResponseEntity<CustomerDTO> getAccountDetails(@RequestParam String mobileNumber) {
+
         CustomerDTO customerDto = accountService.getAccountDetails(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(customerDto);
+    }
+
+    @PutMapping("/{customerId}/update")
+    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable Long customerId, @RequestBody CustomerDTO customerDto) {
+
+        accountService.updateAccountDetails(customerId, customerDto);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(AccountConstants.REQUEST_SUCCESS_CODE, AccountConstants.REQUEST_SUCCESS_MESSAGE));
     }
 }

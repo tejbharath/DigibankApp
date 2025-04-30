@@ -16,4 +16,10 @@ public interface IAccountService {
      * @return the account details
      */
     CustomerDTO getAccountDetails(String mobileNumber);
+
+    /**
+     *
+     * @param customerDto - customerDto of customer
+     */
+    void updateAccountDetails(Long customerId, CustomerDTO customerDto);
 }
