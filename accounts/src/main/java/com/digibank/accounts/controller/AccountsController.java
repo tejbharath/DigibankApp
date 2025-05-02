@@ -32,10 +32,10 @@ public class AccountsController {
         return ResponseEntity.status(HttpStatus.OK).body(customerDto);
     }
 
-    @PutMapping("/{customerId}/update")
-    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable Long customerId, @RequestBody CustomerDTO customerDto) {
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDTO> updateAccount(@RequestBody CustomerDTO customerDto) {
 
-        accountService.updateAccountDetails(customerId, customerDto);
+        accountService.updateAccountDetails(customerDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(AccountConstants.REQUEST_SUCCESS_CODE, AccountConstants.REQUEST_SUCCESS_MESSAGE));
     }
