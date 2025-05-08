@@ -1,10 +1,16 @@
 package com.digibank.accounts.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
+@Schema(
+        name = "Account",
+        description = "Schema to hold Account details",
+        requiredProperties = {"accountNumber", "accountType", "branchAddress"}
+)
 public class AccountDTO {
 
     @NotEmpty(message = "Account number cannot be null or empty")
