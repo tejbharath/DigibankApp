@@ -48,6 +48,7 @@ public class AccountsController {
                 .body(new ResponseDTO(AccountConstants.CREATE_REQUEST_SUCCESS_CODE, AccountConstants.CREATE_REQUEST_SUCCESS_MESSAGE));
     }
 
+
     @Operation(
             summary = "Get Account Details Rest API",
             description = "Get Account Details by Mobile Number using this Rest API"
@@ -63,6 +64,7 @@ public class AccountsController {
         CustomerDTO customerDto = accountService.getAccountDetails(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(customerDto);
     }
+
 
     @Operation(
             summary = "Update Account Details Rest API",
@@ -90,6 +92,7 @@ public class AccountsController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(AccountConstants.REQUEST_SUCCESS_CODE, AccountConstants.REQUEST_SUCCESS_MESSAGE));
     }
+
 
     @Operation(
             summary = "Delete Account Rest API",

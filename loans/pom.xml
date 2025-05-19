@@ -12,7 +12,7 @@
 	<artifactId>loans</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>loans</name>
-	<description>Microservice for loans</description>
+	<description>Microservice for Loans</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -67,6 +67,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations-jakarta</artifactId>
+			<version>2.2.30</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
